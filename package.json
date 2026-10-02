@@ -1,0 +1,40 @@
+{
+  "name": "farm-tourism-production",
+  "version": "2.0.0",
+  "private": true,
+  "type": "module",
+  "engines": {"node": ">=22"},
+  "scripts": {
+    "dev": "vite --host 127.0.0.1",
+    "build": "node scripts/prepare-public-assets.mjs && node scripts/check-arabic-translation-keys.mjs && vite build && node scripts/check-dist-links.mjs",
+    "assets:regen": "node scripts/prepare-public-assets.mjs --force",
+    "start": "node server/src/app.js",
+    "check": "node --check vite.config.js && node --check client/i18n.js && node --check client/site-images.js && node --check client/script.js && node --check client/admin.js && node --check server/src/app.js && node --check server/src/booking-time.js && node --check server/src/db.js && node --check server/src/middleware/auth.js && node --check server/src/middleware/security.js && node --check server/src/cli/migrate.js && node --check server/src/cli/create-admin.js && node --check scripts/optimize-images.mjs && node --check scripts/check-dist-links.mjs && node --check scripts/check-arabic-translation-keys.mjs && node --check scripts/prepare-public-assets.mjs && node --check scripts/migrate-local-images-to-cloudinary.mjs && node --check tests/build-hardening.test.js",
+    "test": "node --test",
+    "optimize:images": "node scripts/optimize-images.mjs",
+    "migrate": "node server/src/cli/migrate.js",
+    "create-admin": "node server/src/cli/create-admin.js",
+    "admin:create": "node server/src/cli/create-admin.js",
+    "db:migrate": "node server/src/cli/migrate.js"
+  },
+  "dependencies": {
+    "bcryptjs": "^3.0.2",
+    "cloudinary": "^2.7.0",
+    "connect-pg-simple": "^10.0.0",
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.7",
+    "express": "^5.1.0",
+    "express-rate-limit": "^7.5.0",
+    "express-session": "^1.18.1",
+    "helmet": "^8.1.0",
+    "multer": "^2.0.2",
+    "pg": "^8.16.3",
+    "pino": "^9.7.0",
+    "pino-http": "^10.4.0",
+    "sharp": "^0.35.5",
+    "zod": "^3.24.4"
+  },
+  "devDependencies": {
+    "vite": "^7.0.0"
+  }
+}
